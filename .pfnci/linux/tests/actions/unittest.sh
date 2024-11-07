@@ -5,6 +5,8 @@ set -uex
 MARKER="${1:-}"; shift
 PYTEST_FILES=(${@:-.})
 
+PYTEST_FILES=cupy_tests/core_tests/fusion_tests/test_array.py
+
 pytest_opts=(
     -rfEX
     --timeout 300
@@ -18,7 +20,7 @@ if [[ "${MARKER}" != "" ]]; then
 fi
 
 # TODO: support coverage reporting
-python3 -m pip install --user pytest-timeout pytest-xdist
+python3 -m pip install --user pytest-timeout pytest-xdist fastrlock hypothesis
 
 pushd tests
 timeout --signal INT --kill-after 10 60 python3 -c 'import cupy; cupy.show_config(_full=True)'
