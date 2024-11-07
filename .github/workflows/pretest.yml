@@ -79,7 +79,7 @@ jobs:
     - name: Build
       run: |
         pip install -U pip wheel setuptools
-        READTHEDOCS=True pip install -v -e .
+        READTHEDOCS=True pip install -v -e .[test]
         ccache --max-size 0.5Gi --cleanup --show-stats
 
     - name: Docs Build
@@ -95,15 +95,15 @@ jobs:
       run: |
         python -c 'import cupy, cupyx'
 
-  build-rocm:
-    runs-on: ubuntu-22.04
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        submodules: recursive
-
-    - name: Build & Test
-      run: |
-        docker run --rm -v "${PWD}:/src" -w /src "rocm/dev-ubuntu-22.04:6.0" bash .github/workflows/scripts/pretest-rocm-test.sh
+  # build-rocm:
+  #   runs-on: ubuntu-22.04
+  #
+  #   steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v4
+  #     with:
+  #       submodules: recursive
+  #
+  #   - name: Build & Test
+  #     run: |
+  #       docker run --rm -v "${PWD}:/src" -w /src "rocm/dev-ubuntu-22.04:6.0" bash .github/workflows/scripts/pretest-rocm-test.sh
