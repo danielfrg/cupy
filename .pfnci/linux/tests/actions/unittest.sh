@@ -20,7 +20,7 @@ if [[ "${MARKER}" != "" ]]; then
 fi
 
 # TODO: support coverage reporting
-python3 -m pip install --user pytest-timeout pytest-xdist fastrlock hypothesis
+python3 -m pip install --user pytest-timeout pytest-xdist
 
 pushd tests
 timeout --signal INT --kill-after 10 60 python3 -c 'import cupy; cupy.show_config(_full=True)'
