@@ -19,4 +19,4 @@ jobs:
     - name: Test
       id: test
       run: |
-        ./.pfnci/linux/run.sh "${{ github.event.action }}" build test
+        ./.pfnci/linux/run.sh cuda120 build test
