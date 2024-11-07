@@ -5,7 +5,7 @@ set -uex
 MARKER="${1:-}"; shift
 PYTEST_FILES=(${@:-.})
 
-PYTEST_FILES=cupy_tests/core_tests/fusion_tests/test_array.py
+PYTEST_FILES=cupy_tests/core_tests/test_core.py
 
 pytest_opts=(
     -rfEX
