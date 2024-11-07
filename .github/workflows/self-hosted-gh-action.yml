@@ -1,0 +1,26 @@
+name: NV Self-Hosted CI
+on:
+  pull_request:
+
+env:
+  CI_REPO_OWNER: 'cupy'
+  CI_REPO_NAME: 'self-hosted-ci'
+
+jobs:
+  nv-build:
+    runs-on: cupy-ci
+
+    strategy:
+      matrix:
+        target: ["cuda120"]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Test
+      id: test
+      run: |
+        ./.pfnci/linux/run.sh ${{ matrix.target }} build test
